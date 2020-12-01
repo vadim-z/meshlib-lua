@@ -8,10 +8,10 @@ typedef enum {
   MESH_vol = 2
 } mesh_dom;
 
-int meshlib_init(char *libpath);
+int meshlib_init(const char *libpath);
 void meshlib_close(void);
 
-int mesh_init(char *mesh_file_name, double Rf_ex, double Rcl_in, 
+int mesh_init(const char *mesh_file_name, double Rf_ex, double Rcl_in, 
 		int phys_pel, int phys_clad,
 		int phys_surf_pel, int phys_surf_clad);
 /* Get nodes */
@@ -27,7 +27,7 @@ int mesh_nels(int phys, int *nels);
 int mesh_el_tet10(int phys, int kel, int nodes[10]);
 
 /* Call external functions */
-int mesh_func_init(char *func_file_name);
-int mesh_func_call(char *func_name, char *params, double *res, ...);
+int mesh_func_init(const char *func_file_name);
+int mesh_func_call(const char *func_name, const char *params, double *res, ...);
 
 #endif

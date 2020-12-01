@@ -9,7 +9,7 @@
 
 static lua_State *L_st;
 
-int meshlib_init(char *libpath) {
+int meshlib_init(const char *libpath) {
   char psep;
   int err;
 
@@ -75,7 +75,7 @@ void meshlib_close(void) {
 #define END() { assert(lua_gettop(L_st) == 1); return err; }
 
 
-int mesh_init(char *mesh_file_name,
+int mesh_init(const char *mesh_file_name,
 	      double Rf_ex, double Rcl_in, 
 	      int phys_pel, int phys_clad,
 	      int phys_surf_pel, int phys_surf_clad) {
@@ -273,7 +273,7 @@ int mesh_el_tet10(int phys, int kel, int nodes[10]) {
   END();
 }
 
-int mesh_func_init(char *func_file_name) {
+int mesh_func_init(const char *func_file_name) {
   int err;
 
   METHOD("func_init");
@@ -287,7 +287,7 @@ int mesh_func_init(char *func_file_name) {
   END();
 }
 
-int mesh_func_call(char *func_name, char *params, double *res, ...) {
+int mesh_func_call(const char *func_name, const char *params, double *res, ...) {
   va_list aptr;
   int nargs, err;
 
@@ -308,7 +308,7 @@ int mesh_func_call(char *func_name, char *params, double *res, ...) {
       nargs++;
       break;
     case 'c':
-      lua_pushstring(L_st, va_arg(aptr, char *));
+      lua_pushstring(L_st, va_arg(aptr, const char *));
       nargs++;
       break;
     default:
